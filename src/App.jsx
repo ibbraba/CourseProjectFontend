@@ -4,10 +4,12 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Link, Navigate, Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import IndexPage from './Pages/IndexPage'
-import LeconPage from './Pages/LeconPage'
-import ArticlePage from './Pages/ArticlePage'
-import CategoriesPage from './Pages/CategoriesPage'
-import PresentationPage from './Pages/PresentationPage'
+import LeconPage from './Lessons/Pages/LeconPage'
+import ArticlePage from './Article/Pages/ArticlePage'
+import CategoriesPage from './Category/Pages/CategoriesPage'
+import PresentationPage from './App/Pages/PresentationPage'
+import MentionsLegalesPage from './App/Pages/MentionsLegalesPage'
+import PolitiquePage from './App/Pages/PolitiquePage'
 
 function App() {
  
@@ -39,6 +41,11 @@ function App() {
         <Route path='/articles' element={<ArticlePage></ArticlePage>}></Route>
         <Route path='/categories' element={<CategoriesPage></CategoriesPage>}></Route>
         <Route path='/presentation' element={<PresentationPage></PresentationPage>}></Route>
+
+
+        <Route path='/mention-legales' element={<MentionsLegalesPage></MentionsLegalesPage>}></Route>
+        <Route path='/politique-confidentialite' element={<PolitiquePage></PolitiquePage>}></Route>
+
       </Routes>
 
 
