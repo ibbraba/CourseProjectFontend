@@ -1,8 +1,9 @@
 import React from 'react'
+import SingleArticleComponent from '../Components/SingleArticleComponent'
 
 const SingleArticlePage = () => {
   return (
-    <div>SingleArticlePage</div>
+    <SingleArticleComponent></SingleArticleComponent>
   )
 }
 

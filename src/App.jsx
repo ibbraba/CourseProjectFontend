@@ -3,13 +3,15 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Link, Navigate, Route, Routes, useNavigate, useParams } from 'react-router-dom'
-import IndexPage from './Pages/IndexPage'
+
 import LeconPage from './Lessons/Pages/LeconPage'
 import ArticlePage from './Article/Pages/ArticlePage'
 import CategoriesPage from './Category/Pages/CategoriesPage'
 import PresentationPage from './App/Pages/PresentationPage'
 import MentionsLegalesPage from './App/Pages/MentionsLegalesPage'
 import PolitiquePage from './App/Pages/PolitiquePage'
+import IndexPage from './App/Pages/IndexPage'
+import SingleArticlePage from './Article/Pages/SingleArticlePage'
 
 function App() {
  
@@ -36,13 +38,27 @@ function App() {
       </header>
 
       <Routes>
+
+        {/* Index */} 
         <Route path='/' element={<IndexPage></IndexPage>}></Route>
-        <Route path='/lecons' element={<LeconPage></LeconPage>}></Route>
+
+
+        {/* Article */}
+        <Route path='/article/:id' element={<SingleArticlePage></SingleArticlePage>}></Route>
         <Route path='/articles' element={<ArticlePage></ArticlePage>}></Route>
+
+        {/* Categories */}
         <Route path='/categories' element={<CategoriesPage></CategoriesPage>}></Route>
+
+        {/* Lessons */}
+        <Route path='/lecons' element={<LeconPage></LeconPage>}></Route>
+
+
+        {/* Presentation  */}
         <Route path='/presentation' element={<PresentationPage></PresentationPage>}></Route>
 
 
+        {/* Other  */}
         <Route path='/mention-legales' element={<MentionsLegalesPage></MentionsLegalesPage>}></Route>
         <Route path='/politique-confidentialite' element={<PolitiquePage></PolitiquePage>}></Route>
 
