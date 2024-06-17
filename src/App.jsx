@@ -37,6 +37,7 @@ function App() {
 
       </header>
 
+      <div className="page-content">
       <Routes>
 
         {/* Index */} 
@@ -46,6 +47,7 @@ function App() {
         {/* Article */}
         <Route path='/article/:id' element={<SingleArticlePage></SingleArticlePage>}></Route>
         <Route path='/articles' element={<ArticlePage></ArticlePage>}></Route>
+        <Route path='/articles/:id' element={<ArticlePage></ArticlePage>}></Route>
 
         {/* Categories */}
         <Route path='/categories' element={<CategoriesPage></CategoriesPage>}></Route>
@@ -63,7 +65,7 @@ function App() {
         <Route path='/politique-confidentialite' element={<PolitiquePage></PolitiquePage>}></Route>
 
       </Routes>
-
+      </div>
 
 
       <footer>

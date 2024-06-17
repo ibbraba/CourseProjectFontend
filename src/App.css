@@ -1,0 +1,15 @@
+header{
+    PADDING: 5%;
+    background-color: #DEDEDE;
+    margin-bottom: 50px;
+}
+
+.page-content {
+    padding: 0 5%;
+    margin-bottom: 100px;
+}
+
+footer{
+    PADDING: 5%;
+    background-color: #DEDEDE;
+}
