@@ -35,7 +35,7 @@ const ArticleComponent = () => {
     useEffect(() => {
         console.log("Category change ...");
         console.log("Fetching articles from category" + currentCategoryId);
-        if(currentCategoryId){
+        if (currentCategoryId) {
 
             GetByCategory()
         }
@@ -91,22 +91,31 @@ const ArticleComponent = () => {
     return (
         <div>
 
-            <h2>Categories</h2>
-            {categories && categories.map(category =>
+            <h1 className='mb-2'>Categories</h1>
+            <div className='category-list  mt-3 mb-5'>
+                {categories && categories.map(category =>
 
-                <div key={category.categoryId}>
-                    <button className='btn btn-primary' onClick={() => { setCurrentCategoryId(category.categoryId), console.log("Clickcategory"); }}>{category.title}</button>
-                </div>
-            )}
-
+                    <div key={category.categoryId}>
+                        <button className='btn btn-primary' onClick={() => { setCurrentCategoryId(category.categoryId), console.log("Clickcategory"); }}>{category.title}</button>
+                    </div>
+                )}
+            </div>
 
             <h2>Articles</h2>
             {articles && articles.map(article =>
 
-                <div key={article.id}>
-                    <h1> {article.title} </h1>
-                    <Link to={'/article/' + article.id}> Lire l'article </Link>
-                </div>
+                <>
+                    <div key={article.id} className="card mb-4" >
+                    
+                            <div className="card-body">
+                                <h5 className="card-title">{article.title}</h5>
+                                <p className="card-text">{article.description}</p>
+                                <Link className='btn btn-primary' to={'/article/' + article.id}> Lire l'article </Link>
+                                
+                            </div>
+                    </div>
+
+                </>
             )}
 
             {errorMessage &&

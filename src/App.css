@@ -9,6 +9,24 @@ header{
     margin-bottom: 100px;
 }
 
+
+
+
+
+
+/* Article Page */ 
+
+.category-list{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+
+
+
+
 footer{
     PADDING: 5%;
     background-color: #DEDEDE;

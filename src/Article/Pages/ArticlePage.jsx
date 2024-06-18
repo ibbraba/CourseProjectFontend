@@ -7,7 +7,7 @@ const ArticlePage = () => {
 
 
 
-    <div>ArticlePage
+    <div>
 
 
       <ArticleComponent></ArticleComponent>
