@@ -13,6 +13,7 @@ import PolitiquePage from './App/Pages/PolitiquePage'
 import IndexPage from './App/Pages/IndexPage'
 import SingleArticlePage from './Article/Pages/SingleArticlePage'
 import SingleCategoryPage from './Category/Pages/SingleCategoryPage'
+import SingleLeconPage from './Lessons/Pages/SingleLeconPage'
 
 function App() {
  
@@ -56,6 +57,7 @@ function App() {
 
         {/* Lessons */}
         <Route path='/lecons' element={<LeconPage></LeconPage>}></Route>
+        <Route path='/lecon/:id' element={<SingleLeconPage></SingleLeconPage>}></Route>
 
 
         {/* Presentation  */}

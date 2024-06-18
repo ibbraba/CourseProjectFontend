@@ -120,7 +120,7 @@ const SingleCategoryPage = () => {
                     <div className="card-body">
                         <h5 className="card-title">{lesson.title}</h5>
                         <p className="card-text">{lesson.description}</p>
-                        <Link className='btn btn-primary' to={'/lesson/' + lesson.id}> Lire  </Link>
+                        <Link className='btn btn-primary' to={'/lecon/' + lesson.id}> Lire  </Link>
 
                     </div>
                 </div>

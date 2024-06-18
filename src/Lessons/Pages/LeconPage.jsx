@@ -1,8 +1,9 @@
 import React from 'react'
+import LessonComponent from '../Components/LessonComponent'
 
 const LeconPage = () => {
   return (
-    <div>LeconPage</div>
+    <LessonComponent></LessonComponent>
   )
 }
 

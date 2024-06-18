@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const SingleArticleComponent = () => {
        
@@ -43,11 +43,13 @@ const SingleArticleComponent = () => {
 
         }
 
-        {errorMessage && 
+        {!article && errorMessage && 
 
             <div className="alert "> {errorMessage} </div>
             
         }
+
+        <Link to="/articles"> Retour à la liste des articles</Link>
 
         </>
     )

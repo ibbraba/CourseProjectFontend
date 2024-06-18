@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 
 const ArticleComponent = () => {
 
-    const [articles, setArticles] = useState([])
+    const [articles, setArticles] = useState(null)
     const [errorMessage, SetErrorMessage] = useState(null)
     const [categories, setCategories] = useState([])
 
@@ -118,7 +118,7 @@ const ArticleComponent = () => {
                 </>
             )}
 
-            {errorMessage &&
+            {!articles && errorMessage &&
                 <div className="alert alert-danger"> {errorMessage} </div>
             }
 
