@@ -12,6 +12,7 @@ import MentionsLegalesPage from './App/Pages/MentionsLegalesPage'
 import PolitiquePage from './App/Pages/PolitiquePage'
 import IndexPage from './App/Pages/IndexPage'
 import SingleArticlePage from './Article/Pages/SingleArticlePage'
+import SingleCategoryPage from './Category/Pages/SingleCategoryPage'
 
 function App() {
  
@@ -51,6 +52,7 @@ function App() {
 
         {/* Categories */}
         <Route path='/categories' element={<CategoriesPage></CategoriesPage>}></Route>
+        <Route path='/category/:id' element={<SingleCategoryPage></SingleCategoryPage>}></Route>
 
         {/* Lessons */}
         <Route path='/lecons' element={<LeconPage></LeconPage>}></Route>

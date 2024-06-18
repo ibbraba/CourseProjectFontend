@@ -12,4 +12,6 @@
 
 // Mention légales et Politique de confidentialité
 
-//
+//Refactor redundance in calls (getcategories ...)
+
+//Sort article and lessons from one category by date
