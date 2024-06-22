@@ -14,6 +14,9 @@ import IndexPage from './App/Pages/IndexPage'
 import SingleArticlePage from './Article/Pages/SingleArticlePage'
 import SingleCategoryPage from './Category/Pages/SingleCategoryPage'
 import SingleLeconPage from './Lessons/Pages/SingleLeconPage'
+import AdminIndexPage from './Admin/Pages/AdminIndexPage'
+import PostManagementPage from './Admin/Pages/PostManagementPage'
+import WritePostPage from './Admin/Pages/WritePostPage'
 
 function App() {
  
@@ -30,10 +33,10 @@ function App() {
       <div className="header-menu">
 
           <ul className='header-menu-list'>
-              <li> Leçons </li>
-              <li> Articles </li>
-              <li> Categories </li>
-              <li> Présentation </li>
+              <Link to={'/lecons'}> Leçons </Link>
+              <Link to={'/articles'}> Articles </Link>
+              <Link to={'/categories'}> Categories </Link>
+              
           </ul>
       </div>
 
@@ -63,6 +66,12 @@ function App() {
         {/* Presentation  */}
         <Route path='/presentation' element={<PresentationPage></PresentationPage>}></Route>
 
+
+        {/* Admin */}
+        <Route path='/admin-index' element={<AdminIndexPage></AdminIndexPage>}></Route>
+        <Route path='/admin-manage' element={<PostManagementPage></PostManagementPage>}></Route>
+        <Route path='/admin-create' element={<WritePostPage></WritePostPage>}></Route>
+        <Route path='/admin-create/:post/:id' element={<WritePostPage></WritePostPage>}></Route>
 
         {/* Other  */}
         <Route path='/mention-legales' element={<MentionsLegalesPage></MentionsLegalesPage>}></Route>

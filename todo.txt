@@ -15,3 +15,9 @@
 //Refactor redundance in calls (getcategories ...)
 
 //Sort article and lessons from one category by date
+
+//Todo : Login pages
+
+//Add view to course in Backend
+
+//ToFinish : WritePostComponent

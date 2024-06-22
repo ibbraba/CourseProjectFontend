@@ -26,7 +26,7 @@ const SingleArticleComponent = () => {
             setArticle(res.data)
             SetErrorMessage(null)            
         } catch (error) {
-            SetErrorMessage(error)
+            SetErrorMessage("Une erreur est survenue lors de la récuperation de l'article")
             setArticle(null)
         }
     }
@@ -45,7 +45,7 @@ const SingleArticleComponent = () => {
 
         {!article && errorMessage && 
 
-            <div className="alert "> {errorMessage} </div>
+            <div className="alert alert-danger"> {errorMessage} </div>
             
         }
 

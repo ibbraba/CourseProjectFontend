@@ -16,9 +16,6 @@ const SingleCategoryPage = () => {
     useEffect(() => {
 
         GetCategories()
-
-
-
     }, [])
 
 

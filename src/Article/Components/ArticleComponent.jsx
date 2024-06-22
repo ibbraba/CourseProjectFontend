@@ -91,7 +91,7 @@ const ArticleComponent = () => {
     return (
         <div>
 
-            <h1 className='mb-2'>Categories</h1>
+            <h1 className='mb-2'>Articles</h1>
             <div className='category-list  mt-3 mb-5'>
                 {categories && categories.map(category =>
 
@@ -106,13 +106,13 @@ const ArticleComponent = () => {
 
                 <>
                     <div key={article.id} className="card mb-4" >
-                    
-                            <div className="card-body">
-                                <h5 className="card-title">{article.title}</h5>
-                                <p className="card-text">{article.description}</p>
-                                <Link className='btn btn-primary' to={'/article/' + article.id}> Lire l'article </Link>
-                                
-                            </div>
+
+                        <div className="card-body">
+                            <h5 className="card-title">{article.title}</h5>
+                            <p className="card-text">{article.description}</p>
+                            <Link className='btn btn-primary' to={'/article/' + article.id}> Lire l'article </Link>
+
+                        </div>
                     </div>
 
                 </>

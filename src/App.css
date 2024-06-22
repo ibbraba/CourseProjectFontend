@@ -4,6 +4,11 @@ header{
     margin-bottom: 50px;
 }
 
+.header-menu-list{
+    display: flex;
+    flex-direction: column;
+}
+
 .page-content {
     padding: 0 5%;
     margin-bottom: 100px;
