@@ -51,6 +51,29 @@ const ManagePostComponent = () => {
     }
   }
 
+  async function DeleteArticle(id){
+    
+    if(window.confirm("Voulez vous supprimer cette publication ? ")){
+      try {
+        var response = await axios.delete("https://localhost:7201/Article/Delete?id=" + id)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
+  }
+
+  async function DeleteLecon(id){
+    if(window.confirm("Voulez vous supprimer cette publication ? ")){
+      try {
+        var response = await axios.delete("https://localhost:7201/Course/Delete?id=" + id)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
+  }
+
   return (
 
     <div>
@@ -67,7 +90,8 @@ const ManagePostComponent = () => {
             <p className="card-text">{article.description}</p>
             <Link className='btn btn-info' to={'/article/' + article.id}> Lire </Link>
             <Link className='btn btn-warning' to={'/admin-create/article/' + article.id}> Editer </Link>
-            <button className='btn btn-danger' > Supprimer </button>
+            <button onClick={() => {DeleteArticle(article.id)}}  className='btn btn-danger'> Supprimer </button>
+
 
           </div>
         </div>
@@ -81,7 +105,7 @@ const ManagePostComponent = () => {
           <p className="card-text">{lesson.description}</p>
           <Link className='btn btn-info' to={'/article/' + lesson.id}> Lire </Link>
             <Link className='btn btn-warning' to={'/admin-create/lecon/' + lesson.id}> Editer </Link>
-            <button className='btn btn-danger'> Supprimer </button>
+            <button onClick={() => {DeleteLecon(lesson.id)}}  className='btn btn-danger'> Supprimer </button>
 
         </div>
       </div>)}

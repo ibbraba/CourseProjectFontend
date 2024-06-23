@@ -56,6 +56,27 @@ const WritePostComponent = () => {
 
     }
 
+    async function UpdateArticle() {
+        try {
+            var response = await axios.put("https://localhost:7201/Article/Update?id=" + id, {
+      
+                "title": "string",
+                "description": "strinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrin",
+                "categoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "content": "strinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrinstrin",
+                "updatedAt": "2024-06-23T09:49:03.559Z",
+    
+            })
+            console.log(response);
+
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     return (
         <div>WritePostComponent
             {dbpost &&
@@ -86,7 +107,7 @@ const WritePostComponent = () => {
 
             ></CKEditor>
 
-            <button className='mb-5 btn btn-primary' onClick={() => {console.log(content);}}> Editer l'article </button>
+            <button className='mb-5 btn btn-primary' onClick={() => { UpdateArticle() }}> Editer l'article </button>
 
             {!dbpost && errorMessage && <div className='alert alert-danger'>{errorMessage}</div>}
 
