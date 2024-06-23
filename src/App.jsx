@@ -17,6 +17,7 @@ import SingleLeconPage from './Lessons/Pages/SingleLeconPage'
 import AdminIndexPage from './Admin/Pages/AdminIndexPage'
 import PostManagementPage from './Admin/Pages/PostManagementPage'
 import WritePostPage from './Admin/Pages/WritePostPage'
+import LoginPage from './App/Pages/LoginPage'
 
 function App() {
  
@@ -74,6 +75,7 @@ function App() {
         <Route path='/admin-create/:post/:id' element={<WritePostPage></WritePostPage>}></Route>
 
         {/* Other  */}
+        <Route path='/login' element={<LoginPage></LoginPage>}></Route>
         <Route path='/mention-legales' element={<MentionsLegalesPage></MentionsLegalesPage>}></Route>
         <Route path='/politique-confidentialite' element={<PolitiquePage></PolitiquePage>}></Route>
 
