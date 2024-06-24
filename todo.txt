@@ -20,4 +20,4 @@
 
 //Add view to course in Backend
 
-//ToFinish : Update request in  WritePostComponent
+//ToFinish : CUD function with Bearer token
