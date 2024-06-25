@@ -20,4 +20,6 @@
 
 //Add view to course in Backend
 
-//ToFinish : CUD function with Bearer token
+//TODO Bind difficulty and Link To reposiory in SP 
+
+//Refactor Lecon spelling

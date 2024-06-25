@@ -28,9 +28,11 @@ header{
 
 
 
+/* Admin */
 
-
-
+.ck-content {
+    min-height: 400px;
+}
 
 footer{
     PADDING: 5%;

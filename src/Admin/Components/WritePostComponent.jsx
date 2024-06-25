@@ -19,6 +19,7 @@ const WritePostComponent = () => {
 
     const [errorMessage, SetErrorMessage] = useState(null)
     const handleChange = (e, editor) => { setContent(editor.getData()) }
+    const [successMessage, setSuccessMessage] = useState(null)
 
     const [categories, setCategories] = useState(null)
 
@@ -37,6 +38,14 @@ const WritePostComponent = () => {
     }, [])
 
     useEffect(() => {
+        if (dbpost) {
+
+            console.log(dbpost);
+
+        }
+        if (categories) {
+            console.log(categories);
+        }
     }, [dbpost, categories])
 
     useEffect(() => {
@@ -45,6 +54,11 @@ const WritePostComponent = () => {
         console.log(selectedType);
 
     }, [selectedCategory, selectedType])
+
+    useEffect(() => {
+
+        console.log(successMessage);
+    }, [successMessage])
 
     async function GetPosiById() {
         try {
@@ -68,38 +82,87 @@ const WritePostComponent = () => {
 
     }
 
-    async function UpdateArticle() {
+    async function UpdatePost() {
 
-        console.log("Category " + selectedCategory);
-        console.log("Type: " + post);
+        //Find Category 
+
+        var category = categories.filter((x) => x.title === selectedCategory)
+        console.log(category);
+
+       
+        console.log("Type: " + dbpost.type);
         console.log("Title: " + title);
         console.log("Description: " + description);
         console.log("Content :" + content);
 
+        //Eartly return empty content
+        if(content === null){
+            SetErrorMessage("Veuillez entrez du contenu")
+            setSuccessMessage(null)
+            return
+        }
         try {
-            //Find Category 
 
-            var category = categories.filter((x) => x.title === selectedCategory)
-            console.log(category);
 
+            //Add JWT to request header
             let token = localStorage.getItem("LoginToken")
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            var response = await axios.put("https://localhost:7201/Article/Update?id=" + id, {
+            console.log("Selected type : " + selectedType);
+            //Updates Article
+            if (dbpost.type === "Article") {
 
-                "title": title ? title : dbpost.title,
-                "description": description ? description : dbpost.description,
-                "categoryId": category[0].categoryId ? category[0].categoryId : dbpost.categoryId,
-                "content": content ? content : dbpost.content
+                console.log("Updating article ...");
+                let response = await axios.put("https://localhost:7201/Article/Update?id=" + id, {
+                    "title": title ? title : dbpost.title,
+                    "description": description ? description : dbpost.description,
+                    "categoryId": selectedCategory ? category[0].categoryId : dbpost.categoryId,
+                    "content": content ? content : dbpost.content
+                })
+
+                console.log(response);
+
+                if (response.status == 200) {
+                    setSuccessMessage("Article modifié avec succées")
+                    SetErrorMessage(null)
+                }
+            }
+
+            //Updates Lesson
+            else if(dbpost.type === "Leçon"){
+                console.log("Updating lesson");
+            /*
+                var response2 = await axios.put("https://localhost:7201/Course/Update?courseeeId=" + id, {
+                    "title": title ? title : dbpost.title,
+                    "description": description ? description : dbpost.description,
+                    "categoryId": category[0].categoryId ? category[0].categoryId : dbpost.categoryId,
+                    "content": content ? content : dbpost.content,
+                    "difficulty": difficulty ? difficulty : dbpost.difficulty,
+                    "tested": true,
+                    "linkToRepository": linkToRepository ? linkToRepository : dbpost.linkToRepository
+                })
+            */
+                let response = await axios.put("https://localhost:7201/Course/Update?courseId=" + id ,{
+                    "title": title ? title : dbpost.title,
+                    "description": description ? description : dbpost.description,
+                    "categoryId": selectedCategory ? category[0].categoryId : dbpost.categoryId,
+                    "content": content ? content : dbpost.content,
+                    "difficulty": difficulty ? difficulty : dbpost.difficulty,
+                    "tested": true,
+                    "linkToRepository": linkToRepository ? linkToRepository : dbpost.linkToRepository
+                })
+                
 
 
-            })
-            console.log(response);
+                console.log(response);
 
-
-
-
+                if (response.status == 200) {
+                    setSuccessMessage("Leçon modifiée avec succées")
+                    SetErrorMessage(null)
+                }
+            }
         } catch (error) {
-            console.log(error);
+            SetErrorMessage("Une erreur est survenue lors de la modification de la publication")
+            setSuccessMessage(null)
         }
     }
 
@@ -110,9 +173,19 @@ const WritePostComponent = () => {
         console.log("Description: " + description);
         console.log("Content :" + content);
 
+            //Eartly return empty content
+            console.log(content);
+            if(content === null){
+                SetErrorMessage("Veuillez entrez du contenu")
+                setSuccessMessage(null)
+                return
+            }
+
         var category = categories.filter((x) => x.title === selectedCategory)
         let token = localStorage.getItem("LoginToken")
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+
 
         try {
             if (selectedType === "article") {
@@ -124,6 +197,12 @@ const WritePostComponent = () => {
                     "content": content
                 })
                 console.log(response);
+                if (response.status == 200) {
+                    console.log("Response success");
+                    setSuccessMessage("Article crée avec succées")
+                    SetErrorMessage(null)
+                }
+
             } else {
                 console.log("Creating Lesson ...");
                 let response = await axios.post("https://localhost:7201/Course/Create", {
@@ -131,16 +210,21 @@ const WritePostComponent = () => {
                     "description": description,
                     "categoryId": category[0].categoryId,
                     "content": content,
-                    "difficulty" : difficulty, 
-                    "linkToRepository" : linkToRepository
+                    "difficulty": difficulty,
+                    "linkToRepository": linkToRepository ? linkToRepository : "none"
                 })
+                if (response.status == 200) {
+                    setSuccessMessage("Leçon crée avec succées")
+                    SetErrorMessage(null)
+                }
                 console.log(response);
 
 
             }
 
         } catch (error) {
-            console.log(error);
+            SetErrorMessage("Une erreur est survenue lors de la creation de la publication")
+            setSuccessMessage(null)
         }
     }
 
@@ -160,76 +244,111 @@ const WritePostComponent = () => {
 
 
     return (
-        <div>WritePostComponent
+        <div>
+
+            {/* Presentation */}
+
             {dbpost &&
                 <div>
+                    <h2>Editer une publication</h2>
                     <h3> {dbpost.title}</h3>
 
                 </div>
             }
 
-            <div className='form-group mb-5'>
-                <label htmlFor=""> Categorie </label>
-                <select onChange={(e) => setSelectedCategory(e.target.value)}>   {categories && categories.map(category =>
-
-                    <option key={category.id} value={category.id} defaultValue={dbpost ? dbpost.categoryId : null}> {category.title}</option>
-
-                )}  </select>
-            </div>
-
-            <div className='form-group mb-5'>
-                <select onChange={(e) => setSelectedType(e.target.value)} defaultValue={post}>
-                    <option key="article" value="article"> Article </option>
-                    <option key="Lecon" value="Lecon"> Leçon </option>
-                </select>
-            </div>
+            {!dbpost &&
+                <div> <h2>Nouvelle publication</h2> </div>
+            }
 
 
-            {selectedType == "Lecon" && 
+            {/* Formulaire */}
+            <form className='needs-validation' onSubmit={(e) => {
+                e.preventDefault()
+                {dbpost ? UpdatePost() : CreatePost()}
+            }}  >
                 <div className='form-group mb-5'>
-                <select onChange={(e) => setDifficulty(e.target.value)} defaultValue="Facile">
-                    <option key="article" value="Facile"> Facile </option>
-                    <option key="Lecon" value="Intermédiaire"> Intermédiaire </option>
-                    <option key="Lecon" value="Difficile"> Difficile </option>
-                </select>
-            </div>
+                    <label htmlFor=""> Categorie </label>
+                    <select onChange={(e) => setSelectedCategory(e.target.value)} className='form-control' name="CategorySelect" required>
+                        <option value="" selected={true} > Selectioner une categorie </option>
+                        {categories && categories.map(category =>
 
-            }
+                            <option key={category.id} selected={dbpost && category.categoryId === dbpost.categoryId ? true : false} value={category.id} defaultValue={dbpost ? dbpost.categoryId : null}> {category.title}</option>
+
+                        )}  </select>
+                </div>
+
+                <div className='form-group mb-5'>
+
+                    <select className='form-control' disabled={dbpost ? true : false} name="TypeSelect" onChange={(e) => setSelectedType(e.target.value)} defaultValue={post} required>
+                        <option value="" > Selectioner un type </option>
+                        <option key="article"  value="article"> Article </option>
+                        <option key="Lecon" value="Lecon" > Leçon </option>
+                    </select>
+                </div>
+
+
+                {selectedType === "Lecon" || dbpost.type ==="Leçon" &&
+                    <div className='form-group mb-5'>
+                        <select className='form-control' onChange={(e) => setDifficulty(e.target.value)} defaultValue="Facile" required>
+                            <option key="article" value="Facile"> Facile </option>
+                            <option key="Lecon" value="Intermédiaire"> Intermédiaire </option>
+                            <option key="Lecon" value="Difficile"> Difficile </option>
+                        </select>
+                    </div>
+                }
+
+
+                <div className='form-control form-group mb-5'>
+                    <label className='me-5' htmlFor=""> Titre de l'article</label>
+                    <input type='richtext' className='login-input title-input form-control' defaultValue={dbpost ? dbpost.title : ""} onChange={(e) => setTitle(e.target.value)} required />
+                </div>
+
+                <div className='form-control form-group mb-5'>
+                    <label className='me-5' htmlFor="" > Description</label>
+                    <textarea type='text' className='form-control login-input description-input' defaultValue={dbpost ? dbpost.description : ""} placeholder='Decrivez votre article en quelques lignes' onChange={(e) => setDescription(e.target.value)} required />
+                </div>
+
+
+
+                <CKEditor editor={ClassicEditor}
+                    onChange={(e, editor) => { handleChange(e, editor) }}
+                    data={dbpost ? dbpost.content : ""}
+             
+                ></CKEditor>
+
+                {selectedType === "Lecon" || dbpost.type ==="Leçon" &&
+                    <div className='form-group mb-5'>
+                        <label className='me-5' htmlFor=""> Lien du repository</label>
+                        <input type='richtext' className='form-control login-input title-input' defaultValue={""} onChange={(e) => setLinkToRepository(e.target.value)} />
+                    </div>
+                }
+
+                <div className='form-gorup'>
+
+                    {dbpost &&
+
+                        <button type='submit' className='mb-5 btn btn-primary'> Editer  </button>
+                    }
+
+                    {!dbpost && <button type='submit' className='mb-5 btn btn-primary'> Créer </button>}
+
+
+                </div>
+
+
+
+            </form>
+
+            {/* Actions */}
+
             
-
-            <div className='form-group mb-5'>
-                <label className='me-5' htmlFor=""> Titre de l'article</label>
-                <input type='richtext' className='login-input title-input' defaultValue={dbpost ? dbpost.title : ""} onChange={(e) => setTitle(e.target.value)} />
-            </div>
-
-            <div className='form-group mb-5'>
-                <label className='me-5' htmlFor="" > Description</label>
-                <textarea type='text' className='login-input description-input' defaultValue={dbpost ? dbpost.description : ""} placeholder='Decrivez votre article en quelques lignes' onChange={(e) => setDescription(e.target.value)} />
-            </div>
-
-
-
-            <CKEditor editor={ClassicEditor}
-                onChange={(e, editor) => { handleChange(e, editor) }}
-                data={dbpost ? dbpost.content : ""}
-
-            ></CKEditor>
-
-            {selectedType === "Lecon" && 
-            <div className='form-group mb-5'>
-                <label className='me-5' htmlFor=""> Lien du repository</label>
-                <input type='richtext' className='login-input title-input' defaultValue={""} onChange={(e) => setLinkToRepository(e.target.value)} />
-            </div>
-            }
-
-            {dbpost &&
-
-                <button className='mb-5 btn btn-primary' onClick={() => { UpdateArticle() }}> Editer  </button>
-            }
-
-            {!dbpost && !errorMessage && <button className='mb-5 btn btn-primary' onClick={() => { CreatePost() }}> Créer </button>}
+            {/* Message success and failure */}
 
             {!dbpost && errorMessage && <div className='alert alert-danger'>{errorMessage}</div>}
+            {successMessage && <div className='alert alert-success'> {successMessage} </div>}
+
+
+
 
         </div>
     )
