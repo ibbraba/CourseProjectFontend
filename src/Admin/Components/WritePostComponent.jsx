@@ -41,7 +41,8 @@ const WritePostComponent = () => {
         if (dbpost) {
 
             console.log(dbpost);
-
+            setSelectedType(dbpost.type)
+            setDifficulty(dbpost.difficulty)
         }
         if (categories) {
             console.log(categories);
@@ -50,8 +51,8 @@ const WritePostComponent = () => {
 
     useEffect(() => {
 
-        console.log(selectedCategory);
-        console.log(selectedType);
+
+        console.log("selectedType: " + selectedType);
 
     }, [selectedCategory, selectedType])
 
@@ -82,90 +83,6 @@ const WritePostComponent = () => {
 
     }
 
-    async function UpdatePost() {
-
-        //Find Category 
-
-        var category = categories.filter((x) => x.title === selectedCategory)
-        console.log(category);
-
-       
-        console.log("Type: " + dbpost.type);
-        console.log("Title: " + title);
-        console.log("Description: " + description);
-        console.log("Content :" + content);
-
-        //Eartly return empty content
-        if(content === null){
-            SetErrorMessage("Veuillez entrez du contenu")
-            setSuccessMessage(null)
-            return
-        }
-        try {
-
-
-            //Add JWT to request header
-            let token = localStorage.getItem("LoginToken")
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            console.log("Selected type : " + selectedType);
-            //Updates Article
-            if (dbpost.type === "Article") {
-
-                console.log("Updating article ...");
-                let response = await axios.put("https://localhost:7201/Article/Update?id=" + id, {
-                    "title": title ? title : dbpost.title,
-                    "description": description ? description : dbpost.description,
-                    "categoryId": selectedCategory ? category[0].categoryId : dbpost.categoryId,
-                    "content": content ? content : dbpost.content
-                })
-
-                console.log(response);
-
-                if (response.status == 200) {
-                    setSuccessMessage("Article modifié avec succées")
-                    SetErrorMessage(null)
-                }
-            }
-
-            //Updates Lesson
-            else if(dbpost.type === "Leçon"){
-                console.log("Updating lesson");
-            /*
-                var response2 = await axios.put("https://localhost:7201/Course/Update?courseeeId=" + id, {
-                    "title": title ? title : dbpost.title,
-                    "description": description ? description : dbpost.description,
-                    "categoryId": category[0].categoryId ? category[0].categoryId : dbpost.categoryId,
-                    "content": content ? content : dbpost.content,
-                    "difficulty": difficulty ? difficulty : dbpost.difficulty,
-                    "tested": true,
-                    "linkToRepository": linkToRepository ? linkToRepository : dbpost.linkToRepository
-                })
-            */
-                let response = await axios.put("https://localhost:7201/Course/Update?courseId=" + id ,{
-                    "title": title ? title : dbpost.title,
-                    "description": description ? description : dbpost.description,
-                    "categoryId": selectedCategory ? category[0].categoryId : dbpost.categoryId,
-                    "content": content ? content : dbpost.content,
-                    "difficulty": difficulty ? difficulty : dbpost.difficulty,
-                    "tested": true,
-                    "linkToRepository": linkToRepository ? linkToRepository : dbpost.linkToRepository
-                })
-                
-
-
-                console.log(response);
-
-                if (response.status == 200) {
-                    setSuccessMessage("Leçon modifiée avec succées")
-                    SetErrorMessage(null)
-                }
-            }
-        } catch (error) {
-            SetErrorMessage("Une erreur est survenue lors de la modification de la publication")
-            setSuccessMessage(null)
-        }
-    }
-
     async function CreatePost() {
         console.log("Category " + selectedCategory);
         console.log("Type: " + selectedType);
@@ -173,13 +90,13 @@ const WritePostComponent = () => {
         console.log("Description: " + description);
         console.log("Content :" + content);
 
-            //Eartly return empty content
-            console.log(content);
-            if(content === null){
-                SetErrorMessage("Veuillez entrez du contenu")
-                setSuccessMessage(null)
-                return
-            }
+        //Eartly return empty content
+        console.log(content);
+        if (content === null) {
+            SetErrorMessage("Veuillez entrez du contenu")
+            setSuccessMessage(null)
+            return
+        }
 
         var category = categories.filter((x) => x.title === selectedCategory)
         let token = localStorage.getItem("LoginToken")
@@ -188,7 +105,7 @@ const WritePostComponent = () => {
 
 
         try {
-            if (selectedType === "article") {
+            if (selectedType == "article") {
                 console.log("Creating article ...");
                 let response = await axios.post("https://localhost:7201/Article/Create", {
                     "title": title,
@@ -228,6 +145,93 @@ const WritePostComponent = () => {
         }
     }
 
+
+    async function UpdatePost() {
+
+        //Find Category 
+
+        var category = categories.filter((x) => x.title === selectedCategory)
+        console.log(category);
+
+
+        console.log("Type: " + dbpost.type);
+        console.log("Title: " + title);
+        console.log("Description: " + description);
+        console.log("Content :" + content);
+
+        //Eartly return empty content
+        if (content === null) {
+            SetErrorMessage("Veuillez entrez du contenu")
+            setSuccessMessage(null)
+            return
+        }
+        try {
+
+
+            //Add JWT to request header
+            let token = localStorage.getItem("LoginToken")
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            console.log("Selected type : " + selectedType);
+            //Updates Article
+            if (selectedType == "Article") {
+
+                console.log("Updating article ...");
+                let response = await axios.put("https://localhost:7201/Article/Update?id=" + id, {
+                    "title": title ? title : dbpost.title,
+                    "description": description ? description : dbpost.description,
+                    "categoryId": selectedCategory ? category[0].categoryId : dbpost.categoryId,
+                    "content": content ? content : dbpost.content
+                })
+
+                console.log(response);
+
+                if (response.status == 200) {
+                    setSuccessMessage("Article modifié avec succées")
+                    SetErrorMessage(null)
+                }
+            }
+
+            //Updates Lesson
+            else if (selectedType == "Leçon") {
+                console.log("Updating lesson");
+                /*
+                    var response2 = await axios.put("https://localhost:7201/Course/Update?courseeeId=" + id, {
+                        "title": title ? title : dbpost.title,
+                        "description": description ? description : dbpost.description,
+                        "categoryId": category[0].categoryId ? category[0].categoryId : dbpost.categoryId,
+                        "content": content ? content : dbpost.content,
+                        "difficulty": difficulty ? difficulty : dbpost.difficulty,
+                        "tested": true,
+                        "linkToRepository": linkToRepository ? linkToRepository : dbpost.linkToRepository
+                    })
+                */
+               console.log("Difficulty : " + difficulty);
+                let response = await axios.put("https://localhost:7201/Course/Update?courseId=" + id, {
+                    "title": title ? title : dbpost.title,
+                    "description": description ? description : dbpost.description,
+                    "categoryId": selectedCategory ? category[0].categoryId : dbpost.categoryId,
+                    "content": content ? content : dbpost.content,
+                    "difficulty": difficulty,
+                    "tested": true,
+                    "linkToRepository": linkToRepository ? linkToRepository : dbpost.linkToRepository
+                })
+
+
+
+                console.log(response);
+
+                if (response.status == 200) {
+                    setSuccessMessage("Leçon modifiée avec succées")
+                    SetErrorMessage(null)
+                }
+            }
+        } catch (error) {
+            SetErrorMessage("Une erreur est survenue lors de la modification de la publication")
+            setSuccessMessage(null)
+        }
+    }
+
+
     async function GetAllCategories() {
         try {
             console.log("Fetching categories ...")
@@ -264,7 +268,7 @@ const WritePostComponent = () => {
             {/* Formulaire */}
             <form className='needs-validation' onSubmit={(e) => {
                 e.preventDefault()
-                {dbpost ? UpdatePost() : CreatePost()}
+                { dbpost ? UpdatePost() : CreatePost() }
             }}  >
                 <div className='form-group mb-5'>
                     <label htmlFor=""> Categorie </label>
@@ -279,20 +283,21 @@ const WritePostComponent = () => {
 
                 <div className='form-group mb-5'>
 
-                    <select className='form-control' disabled={dbpost ? true : false} name="TypeSelect" onChange={(e) => setSelectedType(e.target.value)} defaultValue={post} required>
+                    <select className='form-control form-group' disabled={dbpost ? true : false} name="TypeSelect" onChange={(e) => setSelectedType(e.target.value)} defaultValue={post} required>
                         <option value="" > Selectioner un type </option>
-                        <option key="article"  value="article"> Article </option>
-                        <option key="Lecon" value="Lecon" > Leçon </option>
+                        <option key="Article" value="article"> Article </option>
+                        <option key="Leçon" value="Leçon" > Leçon </option>
                     </select>
                 </div>
 
 
-                {selectedType === "Lecon" || dbpost.type ==="Leçon" &&
+                {selectedType == "Leçon" &&
                     <div className='form-group mb-5'>
-                        <select className='form-control' onChange={(e) => setDifficulty(e.target.value)} defaultValue="Facile" required>
-                            <option key="article" value="Facile"> Facile </option>
-                            <option key="Lecon" value="Intermédiaire"> Intermédiaire </option>
-                            <option key="Lecon" value="Difficile"> Difficile </option>
+                        <select className='form-control' onChange={(e) => setDifficulty(e.target.value)} required>
+                            <option value="" selected={true} > Selectioner un niveau </option>
+                            <option key="Facile" selected={dbpost && dbpost.difficulty === "Facile" ? true : false} value="Facile"> Facile </option>
+                            <option key="Intermediaire" selected={dbpost && dbpost.difficulty === "Intermédiaire" ? true : false} value="Intermédiaire"> Intermédiaire </option>
+                            <option key="Difficile" selected={dbpost && dbpost.difficulty === "Difficile" ? true : false} value="Difficile"> Difficile </option>
                         </select>
                     </div>
                 }
@@ -313,13 +318,13 @@ const WritePostComponent = () => {
                 <CKEditor editor={ClassicEditor}
                     onChange={(e, editor) => { handleChange(e, editor) }}
                     data={dbpost ? dbpost.content : ""}
-             
+
                 ></CKEditor>
 
-                {selectedType === "Lecon" || dbpost.type ==="Leçon" &&
-                    <div className='form-group mb-5'>
+                {selectedType === "Leçon" &&
+                    <div className='form-control form-group mb-5'>
                         <label className='me-5' htmlFor=""> Lien du repository</label>
-                        <input type='richtext' className='form-control login-input title-input' defaultValue={""} onChange={(e) => setLinkToRepository(e.target.value)} />
+                        <input type='richtext' className='form-control login-input title-input' defaultValue={dbpost ? dbpost.linkToRepository : ""} onChange={(e) => setLinkToRepository(e.target.value)} required />
                     </div>
                 }
 
@@ -341,10 +346,10 @@ const WritePostComponent = () => {
 
             {/* Actions */}
 
-            
+
             {/* Message success and failure */}
 
-            {!dbpost && errorMessage && <div className='alert alert-danger'>{errorMessage}</div>}
+            {errorMessage && <div className='alert alert-danger'>{errorMessage}</div>}
             {successMessage && <div className='alert alert-success'> {successMessage} </div>}
 
 
