@@ -194,17 +194,7 @@ const WritePostComponent = () => {
             //Updates Lesson
             else if (selectedType == "Leçon") {
                 console.log("Updating lesson");
-                /*
-                    var response2 = await axios.put("https://localhost:7201/Course/Update?courseeeId=" + id, {
-                        "title": title ? title : dbpost.title,
-                        "description": description ? description : dbpost.description,
-                        "categoryId": category[0].categoryId ? category[0].categoryId : dbpost.categoryId,
-                        "content": content ? content : dbpost.content,
-                        "difficulty": difficulty ? difficulty : dbpost.difficulty,
-                        "tested": true,
-                        "linkToRepository": linkToRepository ? linkToRepository : dbpost.linkToRepository
-                    })
-                */
+        
                console.log("Difficulty : " + difficulty);
                 let response = await axios.put("https://localhost:7201/Course/Update?courseId=" + id, {
                     "title": title ? title : dbpost.title,
@@ -216,10 +206,8 @@ const WritePostComponent = () => {
                     "linkToRepository": linkToRepository ? linkToRepository : dbpost.linkToRepository
                 })
 
-
-
+                
                 console.log(response);
-
                 if (response.status == 200) {
                     setSuccessMessage("Leçon modifiée avec succées")
                     SetErrorMessage(null)

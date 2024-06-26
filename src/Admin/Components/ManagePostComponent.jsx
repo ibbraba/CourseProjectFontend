@@ -56,6 +56,7 @@ const ManagePostComponent = () => {
     if(window.confirm("Voulez vous supprimer cette publication ? ")){
       try {
         var response = await axios.delete("https://localhost:7201/Article/Delete?id=" + id)
+        GetAllArticles()
       } catch (error) {
         console.log(error);
       }
@@ -67,6 +68,7 @@ const ManagePostComponent = () => {
     if(window.confirm("Voulez vous supprimer cette publication ? ")){
       try {
         var response = await axios.delete("https://localhost:7201/Course/Delete?id=" + id)
+        GetAllLessons()
       } catch (error) {
         console.log(error);
       }
