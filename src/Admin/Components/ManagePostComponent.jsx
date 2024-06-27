@@ -90,8 +90,8 @@ const ManagePostComponent = () => {
           <div className="card-body">
             <h5 className="card-title">{article.title}</h5>
             <p className="card-text">{article.description}</p>
-            <Link className='btn btn-info' to={'/article/' + article.id}> Lire </Link>
-            <Link className='btn btn-warning' to={'/admin-create/article/' + article.id}> Editer </Link>
+            <Link className='btn btn-primary' to={'/article/' + article.id}> Lire </Link>
+            <Link className='btn btn-info' to={'/admin-create/article/' + article.id}> Editer </Link>
             <button onClick={() => {DeleteArticle(article.id)}}  className='btn btn-danger'> Supprimer </button>
 
 
@@ -105,8 +105,8 @@ const ManagePostComponent = () => {
         <div className="card-body">
           <h5 className="card-title">{lesson.title}</h5>
           <p className="card-text">{lesson.description}</p>
-          <Link className='btn btn-info' to={'/article/' + lesson.id}> Lire </Link>
-            <Link className='btn btn-warning' to={'/admin-create/lecon/' + lesson.id}> Editer </Link>
+          <Link className='btn btn-primary' to={'/article/' + lesson.id}> Lire </Link>
+            <Link className='btn btn-info' to={'/admin-create/lecon/' + lesson.id}> Editer </Link>
             <button onClick={() => {DeleteLecon(lesson.id)}}  className='btn btn-danger'> Supprimer </button>
 
         </div>

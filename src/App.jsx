@@ -27,20 +27,25 @@ function App() {
 
       <header>
 
-      <h1>Didacts</h1>
-      <p>By Ibra-Alpha</p>
+
 
 
       <div className="header-menu">
 
+      <h1>Didacts</h1>
+      <p>By Ibra-Alpha</p>
+
           <ul className='header-menu-list'>
-              <Link to={'/lecons'}> Leçons </Link>
-              <Link to={'/articles'}> Articles </Link>
-              <Link to={'/categories'}> Categories </Link>
-              
+   
           </ul>
       </div>
 
+      <div className='header-links'>
+      <Link to={'/lecons'}> Leçons </Link>
+              <Link to={'/articles'}> Articles </Link>
+              <Link to={'/categories'}> Categories </Link>
+              
+      </div>
       </header>
 
       <div className="page-content">

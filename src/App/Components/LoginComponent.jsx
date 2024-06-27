@@ -46,6 +46,7 @@ const LoginComponent = () => {
     const [password, setPassword] = useState(null)
     const [errorMessage, SetErrorMessage] = useState(null)
 
+    const navigate = useNavigate()
 
 
    async function Login(){
@@ -56,6 +57,8 @@ const LoginComponent = () => {
             //Set retuned token in local storage 
             console.log("Login success");
             localStorage.setItem("LoginToken", response.data)
+            navigate("/")
+            
 
         } catch (error) {
             console.log(error);

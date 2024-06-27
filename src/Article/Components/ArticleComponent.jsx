@@ -24,12 +24,32 @@ const ArticleComponent = () => {
 
     //Re render when articles fetched
     useEffect(() => {
+        
+     
+
 
     }, [articles])
 
     useEffect(() => {
+        let articlesVM = []
+           
+        if (categories && articles) {
 
+            articles.forEach(article => {
 
+                categories.forEach(category => {
+                    if (category.categoryId == article.categoryId) {
+                        article.category = category.title
+                      
+                    }
+                })
+
+                articlesVM.push(article)    
+            })
+
+        }
+        console.log(articlesVM);
+        setArticles(articlesVM)
     }, [categories, errorMessage])
 
     useEffect(() => {
@@ -91,7 +111,7 @@ const ArticleComponent = () => {
     return (
         <div>
 
-            <h1 className='mb-2'>Articles</h1>
+
             <div className='category-list  mt-3 mb-5'>
                 {categories && categories.map(category =>
 
@@ -101,16 +121,17 @@ const ArticleComponent = () => {
                 )}
             </div>
 
-            <h2>Articles</h2>
+
             {articles && articles.map(article =>
 
                 <>
                     <div key={article.id} className="card mb-4" >
 
                         <div className="card-body">
+                            <p className='post-category'> {article.category} </p>
                             <h5 className="card-title">{article.title}</h5>
                             <p className="card-text">{article.description}</p>
-                            <Link className='btn btn-primary' to={'/article/' + article.id}> Lire l'article </Link>
+                            <Link className='lbutton btn bg-gray' to={'/article/' + article.id}> Lire l'article </Link>
 
                         </div>
                     </div>

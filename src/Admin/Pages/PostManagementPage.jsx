@@ -35,8 +35,9 @@ const PostManagementPage = () => {
 
   return (
       <>
+        <Link to={"/admin-index"} className='btn btn-primary mb-5'> Retour à l'index </Link>
         <ManagePostComponent></ManagePostComponent>
-        <Link to={"/admin-index"} className='btn btn-primary '> Retour à l'index </Link>
+        <Link to={"/admin-index"} className='btn btn-primary mt-5'> Retour à l'index </Link>
         </>
   )
 }

@@ -33,6 +33,7 @@ const AdminIndexPage = () => {
   }
 
   function Logout(){
+    console.log("Logging out ....");
     RemoveLocalToken()
     navigate("/")
   }
@@ -44,9 +45,9 @@ const AdminIndexPage = () => {
         <p>Que voulez-vous faire ? </p>
 
         <ul>
-            <Link to={"/admin-manage"}>Gerer les posts </Link>
-            <Link to={"/admin-create"}>Ajouter un post </Link>
-            <button className='alert alert-danger' onClick={() => Logout()}> Se deconnecter </button>
+            <Link className='btn btn-primary' to={"/admin-manage"}>Gerer les posts </Link>
+            <Link className='btn btn-info' to={"/admin-create"}>Ajouter un post </Link>
+            <Link className='btn btn-danger' onClick={() => Logout()}> Se deconnecter </Link>
 
         </ul>
 

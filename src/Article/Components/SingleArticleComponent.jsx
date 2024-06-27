@@ -33,12 +33,12 @@ const SingleArticleComponent = () => {
 
 
     return (
-        <>
+        <div className='article-wrapper'>
         {article && 
             <div>
-            <div> {article.id} </div>
-            <div> {article.presentation} </div>
-            <div>{article.content} </div>
+            <div className='article-title mb-5'> {article.title} </div>
+            <div className='article-description mb-5' > {article.description} </div>
+            <div className='article-content'>{article.content} </div>
             </div>       
 
         }
@@ -49,9 +49,9 @@ const SingleArticleComponent = () => {
             
         }
 
-        <Link to="/articles"> Retour à la liste des articles</Link>
+        <Link className='btn lbutton bg-gray mt-5' to="/articles"> Retour à la liste des articles</Link>
 
-        </>
+        </div>
     )
 }
 
