@@ -25,3 +25,9 @@
 //Refactor Lecon spelling
 
 //Navigate after Login 
+
+//TODO : Fix categories .
+
+//TODO : SinglaLeconComponent
+
+//TODO: FInish integration

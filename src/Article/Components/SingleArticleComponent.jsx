@@ -33,12 +33,12 @@ const SingleArticleComponent = () => {
 
 
     return (
-        <div className='article-wrapper'>
+        <div className='post-wrapper'>
         {article && 
             <div>
-            <div className='article-title mb-5'> {article.title} </div>
-            <div className='article-description mb-5' > {article.description} </div>
-            <div className='article-content'>{article.content} </div>
+            <div className='post-title mb-5'> {article.title} </div>
+            <div className='post-description mb-5' > {article.description} </div>
+            <div className='post-content'>{article.content} </div>
             </div>       
 
         }

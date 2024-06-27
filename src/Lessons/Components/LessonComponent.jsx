@@ -18,6 +18,25 @@ const LessonComponent = () => {
 
     useEffect(() => {
 
+        let lessonVM = []
+           
+        if (categories && lessons) {
+
+            lessons.forEach(lesson => {
+
+                categories.forEach(category => {
+                    if (category.categoryId == lesson.categoryId) {
+                        lesson.category = category.title
+                      
+                    }
+                })
+
+                lessonVM.push(lesson)    
+            })
+
+        }
+        console.log(lessonVM);
+        setLessons(lessonVM)
     }, [lessons, categories])
 
     useEffect(() => {
@@ -58,7 +77,7 @@ const LessonComponent = () => {
 
     return (
         <div>
-            <h1 className='mb-2'>Leçons</h1>
+
             <div className='category-list  mt-3 mb-5'>
                 {categories && categories.map(category =>
 
@@ -69,16 +88,17 @@ const LessonComponent = () => {
             </div>
 
 
-            {currentLessons && currentLessons.map(lesson => <>
+            {currentLessons && currentLessons.map(lecon => <>
 
-                <div key={lesson.id} className="card mb-4" >
+                <div key={lecon.id} className="card mb-4" >
 
-                    <div className="card-body">
-                        <h5 className="card-title">{lesson.title}</h5>
-                        <p className="card-text">{lesson.description}</p>
-                        <Link className='btn btn-primary' to={'/lecon/' + lesson.id}> Lire  </Link>
+                <div className="card-body">
+                            <p className='post-category mb-5'> {lecon.category} </p>
+                            <h5 className="card-title">{lecon.title}</h5>
+                            <p className="card-text">{lecon.description}</p>
+                            <Link className='lbutton btn bg-gray' to={'/lecon/' + lecon.id}> Lire la leçon </Link>
 
-                    </div>
+                        </div>
                 </div>
 
 

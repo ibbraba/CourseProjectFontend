@@ -128,7 +128,7 @@ const ArticleComponent = () => {
                     <div key={article.id} className="card mb-4" >
 
                         <div className="card-body">
-                            <p className='post-category'> {article.category} </p>
+                            <p className='post-category mb-5'> {article.category} </p>
                             <h5 className="card-title">{article.title}</h5>
                             <p className="card-text">{article.description}</p>
                             <Link className='lbutton btn bg-gray' to={'/article/' + article.id}> Lire l'article </Link>

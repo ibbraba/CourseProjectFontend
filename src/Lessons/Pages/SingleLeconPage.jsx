@@ -36,21 +36,28 @@ const SingleLeconPage = () => {
   return (
     <div>
 
-      {lesson && <div>
+      {lesson &&   <div className='post-wrapper'>
+        {lesson && 
+            <div>
+            <div className='post-title mb-5 '> {lesson.title} </div>
+            <div className='post-description mb-5' > {lesson.description} </div>
+            <div className='post-content'>{lesson.content} </div>
+            </div>       
+
+        }
         
-        <h1>{lesson.title}</h1>
-
-        <p>{lesson.description} </p>
-
-        <p>{lesson.content}</p>
+       {!lesson && errorMessage && <div className='alert alert-danger'> {errorMessage}  </div>}   
+        
+        
+        <Link className='btn lbutton bg-gray mt-5' to="/lecons" > Retour à la liste des leçons</Link>
+        
+        
         
         </div>}
 
 
-       {!lesson && errorMessage && <div className='alert alert-danger'> {errorMessage}  </div>}   
 
 
-        <Link to="/lecons" > Retour à la liste des leçons</Link>
 
     </div>
   )
