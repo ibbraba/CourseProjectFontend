@@ -20,14 +20,14 @@
 
 //Add view to course in Backend
 
-//TODO Bind difficulty and Link To reposiory in SP 
+//Done Bind difficulty and Link To reposiory in SP 
 
 //Refactor Lecon spelling
 
 //Navigate after Login 
 
-//TODO : Fix categories .
+//Done : Fix categories .
 
-//TODO : SinglaLeconComponent
+//Done : SinglaLeconComponent
 
 //TODO: FInish integration

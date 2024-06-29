@@ -128,7 +128,7 @@ const ArticleComponent = () => {
                 {categories && categories.map(category =>
 
                     <div key={category.categoryId}>
-                        <button className='btn btn-primary' onClick={() => { setCurrentCategoryId(category.categoryId) }}>{category.title}</button>
+                        <button className='btn mbutton category-button' onClick={() => { setCurrentCategoryId(category.categoryId) }}>{category.title}</button>
                     </div>
                 )}
             </div>

@@ -38,7 +38,7 @@ const SingleArticleComponent = () => {
             <div>
             <div className='post-title mb-5'> {article.title} </div>
             <div className='post-description mb-5' > {article.description} </div>
-            <div className='post-content'>{article.content} </div>
+            <div className='post-content'  dangerouslySetInnerHTML={{ __html:article.content}} ></div>
             </div>       
 
         }

@@ -78,6 +78,7 @@ header{
 .category-list{
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .post-title {
@@ -99,6 +100,12 @@ header{
     background-color: #DEDEDE;
 }
 
+.category-button{
+    min-height: 60px;
+    min-width: 180px;
+    background-color: white;
+}
+
 
 /* Admin */
 
@@ -109,4 +116,13 @@ header{
 footer{
     PADDING: 5%;
     background-color: #DEDEDE;
+}
+
+.mentions{
+    min-height: 100px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
