@@ -6,10 +6,12 @@ const LessonComponent = () => {
 
     const [lessons, setLessons] = useState(null)
     const [errorMessage, SetErrorMessage] = useState(null)
-    const [categories, setCategories] = useState([])
+    const [categories, setCategories] = useState(null)
+    const [lessonsVM, setLessonsVM] = useState(null)
 
     const [currentCategoryId, setCurrentCategoryId] = useState(null)
     const [currentLessons, setCurrentLessons] = useState(null) 
+    
 
     useEffect(() => {
         GetAllLessons()
@@ -18,10 +20,15 @@ const LessonComponent = () => {
 
     useEffect(() => {
 
-        let lessonVM = []
+        let VM = []
            
-        if (categories && lessons) {
 
+        if (categories && lessons && !lessonsVM) {
+     
+            console.log("Assigning categories ...");
+            console.log(categories);
+            console.log(lessons);
+            console.log(lessonsVM);
             lessons.forEach(lesson => {
 
                 categories.forEach(category => {
@@ -31,23 +38,37 @@ const LessonComponent = () => {
                     }
                 })
 
-                lessonVM.push(lesson)    
+                VM.push(lesson)    
             })
-
+            console.log(VM);
+            setLessonsVM(VM)
         }
-        console.log(lessonVM);
-        setLessons(lessonVM)
+
+   
+      
+
     }, [lessons, categories])
 
     useEffect(() => {
 
+
+    }, [lessonsVM])
+
+    useEffect(() => {
+
         if(currentCategoryId){
-            var lessonCategory = lessons.filter(x => x.categoryId === currentCategoryId)
+            var lessonCategory = lessonsVM.filter(x => x.categoryId === currentCategoryId)
             console.log(lessonCategory);
             setCurrentLessons(lessonCategory)
         }
 
     }, [currentCategoryId])
+
+
+
+
+
+
 
     //Fetch all categories
     async function GetCategories() {

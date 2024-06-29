@@ -9,11 +9,15 @@ const ArticleComponent = () => {
     const [errorMessage, SetErrorMessage] = useState(null)
     const [categories, setCategories] = useState([])
 
+    const [articlesVM , setArticlesVM] = useState(null)
+
+    const [currentArticles , setCurrentArticles] = useState(null)
+    const [currentCategoryId, setCurrentCategoryId] = useState(null)
+
     //Find category id in request parameter
     const params = useParams()
 
-
-    const [currentCategoryId, setCurrentCategoryId] = useState(null)
+    
 
     useEffect(() => {
 
@@ -28,12 +32,12 @@ const ArticleComponent = () => {
      
 
 
-    }, [articles])
+    }, [errorMessage])
 
     useEffect(() => {
-        let articlesVM = []
+        let VM = []
            
-        if (categories && articles) {
+        if (categories && articles && !articlesVM) {
 
             articles.forEach(article => {
 
@@ -44,22 +48,29 @@ const ArticleComponent = () => {
                     }
                 })
 
-                articlesVM.push(article)    
+                VM.push(article)    
             })
-
+            setArticlesVM(VM)
         }
-        console.log(articlesVM);
-        setArticles(articlesVM)
-    }, [categories, errorMessage])
+    
+    }, [categories, articles ])
 
     useEffect(() => {
         console.log("Category change ...");
         console.log("Fetching articles from category" + currentCategoryId);
         if (currentCategoryId) {
 
-            GetByCategory()
+            var articleCategory = articlesVM.filter(x => x.categoryId === currentCategoryId)
+            console.log(articleCategory);
+            setCurrentArticles(articleCategory)
         }
     }, [currentCategoryId])
+
+
+
+
+
+
     //Fetch all categories
     async function GetCategories() {
         try {
@@ -97,6 +108,7 @@ const ArticleComponent = () => {
             if (response.status == 200) {
                 //      console.log(response.data);
                 setArticles(response.data)
+                setCurrentArticles(response.data)
             }
 
         } catch (error) {
@@ -116,13 +128,13 @@ const ArticleComponent = () => {
                 {categories && categories.map(category =>
 
                     <div key={category.categoryId}>
-                        <button className='btn btn-primary' onClick={() => { setCurrentCategoryId(category.categoryId), console.log("Clickcategory"); }}>{category.title}</button>
+                        <button className='btn btn-primary' onClick={() => { setCurrentCategoryId(category.categoryId) }}>{category.title}</button>
                     </div>
                 )}
             </div>
 
 
-            {articles && articles.map(article =>
+            {currentArticles && currentArticles.map(article =>
 
                 <>
                     <div key={article.id} className="card mb-4" >
