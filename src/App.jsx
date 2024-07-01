@@ -52,11 +52,11 @@ function App() {
       <Routes>
 
         {/* Index */} 
-        <Route path='/' element={<IndexPage></IndexPage>}></Route>
+        <Route path='/' element={<ArticlePage></ArticlePage>}></Route>
 
 
         {/* Article */}
-        <Route path='/article/:id' element={<SingleArticlePage></SingleArticlePage>}></Route>
+        <Route path='/article/:category/:id' element={<SingleArticlePage></SingleArticlePage>}></Route>
         <Route path='/articles' element={<ArticlePage></ArticlePage>}></Route>
         <Route path='/articles/:id' element={<ArticlePage></ArticlePage>}></Route>
 
@@ -66,7 +66,7 @@ function App() {
 
         {/* Lessons */}
         <Route path='/lecons' element={<LeconPage></LeconPage>}></Route>
-        <Route path='/lecon/:id' element={<SingleLeconPage></SingleLeconPage>}></Route>
+        <Route path='/lecon/:category/:id' element={<SingleLeconPage></SingleLeconPage>}></Route>
 
 
         {/* Presentation  */}

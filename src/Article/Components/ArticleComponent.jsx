@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { getImagePath } from '../../Hooks/ImageHook'
 
 
 const ArticleComponent = () => {
@@ -44,10 +45,10 @@ const ArticleComponent = () => {
                 categories.forEach(category => {
                     if (category.categoryId == article.categoryId) {
                         article.category = category.title
+                        article.imgPath = getImagePath(category.title)
                       
                     }
                 })
-
                 VM.push(article)    
             })
             setArticlesVM(VM)
@@ -141,9 +142,14 @@ const ArticleComponent = () => {
 
                         <div className="card-body">
                             <p className='post-category mb-5'> {article.category} </p>
-                            <h5 className="card-title">{article.title}</h5>
-                            <p className="card-text">{article.description}</p>
-                            <Link className='lbutton btn bg-gray' to={'/article/' + article.id}> Lire l'article </Link>
+                            <div className="post-inside-card">
+                            <div>
+                                <h5 className="card-title my-3">{article.title}</h5>
+                                <p className="card-text my-3">{article.description}</p>
+                            </div>
+                            <img src={article.imgPath}></img>
+                        </div>
+                            <Link className='lbutton btn bg-gray' to={'/article/' + article.category + "/" + article.id}> Lire l'article </Link>
 
                         </div>
                     </div>

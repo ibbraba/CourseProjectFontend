@@ -100,7 +100,7 @@ const SingleCategoryPage = () => {
                         <div className="card-body">
                             <h5 className="card-title">{article.title}</h5>
                             <p className="card-text">{article.description}</p>
-                            <Link className='btn btn-primary' to={'/article/' + article.id}> Lire l'article </Link>
+                            <Link className='lbutton btn bg-gray' to={'/article/' + article.id}> Lire  </Link>
 
                         </div>
                     </div>
@@ -117,7 +117,7 @@ const SingleCategoryPage = () => {
                     <div className="card-body">
                         <h5 className="card-title">{lesson.title}</h5>
                         <p className="card-text">{lesson.description}</p>
-                        <Link className='btn btn-primary' to={'/lecon/' + lesson.id}> Lire  </Link>
+                        <Link className='lbutton btn bg-gray' to={'/lecon/' + lesson.id}> Lire  </Link>
 
                     </div>
                 </div>

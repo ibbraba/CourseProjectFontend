@@ -100,12 +100,32 @@ header{
     background-color: #DEDEDE;
 }
 
+.post-inside-card {
+    DISPLAY: FLEX;
+    justify-content: space-between;
+}
+
+.post-inside-card img {
+    max-width: 30%;
+    height: auto;
+   
+    max-height: 300px;
+}
+
 .category-button{
     min-height: 60px;
     min-width: 180px;
     background-color: white;
 }
 
+.card-title, .card-text{
+    max-width: 70%;
+}
+
+.article-image{
+    display: flex;
+    justify-content: center;
+}
 
 /* Admin */
 

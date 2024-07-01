@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { getImagePath } from '../../Hooks/ImageHook'
 
 const LessonComponent = () => {
 
@@ -9,9 +10,11 @@ const LessonComponent = () => {
     const [categories, setCategories] = useState(null)
     const [lessonsVM, setLessonsVM] = useState(null)
 
+
+
     const [currentCategoryId, setCurrentCategoryId] = useState(null)
-    const [currentLessons, setCurrentLessons] = useState(null) 
-    
+    const [currentLessons, setCurrentLessons] = useState(null)
+
 
     useEffect(() => {
         GetAllLessons()
@@ -21,10 +24,10 @@ const LessonComponent = () => {
     useEffect(() => {
 
         let VM = []
-           
+
 
         if (categories && lessons && !lessonsVM) {
-     
+
             console.log("Assigning categories ...");
             console.log(categories);
             console.log(lessons);
@@ -34,18 +37,21 @@ const LessonComponent = () => {
                 categories.forEach(category => {
                     if (category.categoryId == lesson.categoryId) {
                         lesson.category = category.title
-                      
+                        lesson.imgPath = getImagePath(category.title)
+
                     }
+
+
                 })
 
-                VM.push(lesson)    
+                VM.push(lesson)
             })
             console.log(VM);
             setLessonsVM(VM)
         }
 
-   
-      
+
+
 
     }, [lessons, categories])
 
@@ -56,7 +62,7 @@ const LessonComponent = () => {
 
     useEffect(() => {
 
-        if(currentCategoryId){
+        if (currentCategoryId) {
             var lessonCategory = lessonsVM.filter(x => x.categoryId === currentCategoryId)
             console.log(lessonCategory);
             setCurrentLessons(lessonCategory)
@@ -113,13 +119,19 @@ const LessonComponent = () => {
 
                 <div key={lecon.id} className="card mb-4" >
 
-                <div className="card-body">
-                            <p className='post-category mb-5'> {lecon.category} </p>
-                            <h5 className="card-title">{lecon.title}</h5>
-                            <p className="card-text">{lecon.description}</p>
-                            <Link className='lbutton btn bg-gray' to={'/lecon/' + lecon.id}> Lire la leçon </Link>
-
+                    <div className="card-body">
+                        <p className='post-category mb-5'> {lecon.category} </p>
+                        <div className="post-inside-card">
+                            <div>
+                                <h5 className="card-title my-3">{lecon.title}</h5>
+                                <p className="card-text my-3">{lecon.description}</p>
+                            </div>
+                            <img src={lecon.imgPath}></img>
                         </div>
+
+                        <Link className='lbutton btn bg-gray' to={'/lecon/' + lecon.category + "/" + lecon.id}> Lire la leçon </Link>
+
+                    </div>
                 </div>
 
 
