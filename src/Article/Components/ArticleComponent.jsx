@@ -10,15 +10,15 @@ const ArticleComponent = () => {
     const [errorMessage, SetErrorMessage] = useState(null)
     const [categories, setCategories] = useState([])
 
-    const [articlesVM , setArticlesVM] = useState(null)
+    const [articlesVM, setArticlesVM] = useState(null)
 
-    const [currentArticles , setCurrentArticles] = useState(null)
+    const [currentArticles, setCurrentArticles] = useState(null)
     const [currentCategoryId, setCurrentCategoryId] = useState(null)
 
     //Find category id in request parameter
     const params = useParams()
 
-    
+
 
     useEffect(() => {
 
@@ -29,15 +29,15 @@ const ArticleComponent = () => {
 
     //Re render when articles fetched
     useEffect(() => {
-        
-     
+
+
 
 
     }, [errorMessage])
 
     useEffect(() => {
         let VM = []
-           
+
         if (categories && articles && !articlesVM) {
 
             articles.forEach(article => {
@@ -46,15 +46,15 @@ const ArticleComponent = () => {
                     if (category.categoryId == article.categoryId) {
                         article.category = category.title
                         article.imgPath = getImagePath(category.title)
-                      
+
                     }
                 })
-                VM.push(article)    
+                VM.push(article)
             })
             setArticlesVM(VM)
         }
-    
-    }, [categories, articles ])
+
+    }, [categories, articles])
 
     useEffect(() => {
         console.log("Category change ...");
@@ -143,12 +143,12 @@ const ArticleComponent = () => {
                         <div className="card-body">
                             <p className='post-category mb-5'> {article.category} </p>
                             <div className="post-inside-card">
-                            <div>
-                                <h5 className="card-title my-3">{article.title}</h5>
-                                <p className="card-text my-3">{article.description}</p>
+                                <div>
+                                    <h5 className="card-title my-3">{article.title}</h5>
+                                    <p className="card-text my-3">{article.description}</p>
+                                </div>
+                                <img src={article.imgPath}></img>
                             </div>
-                            <img src={article.imgPath}></img>
-                        </div>
                             <Link className='lbutton btn bg-gray' to={'/article/' + article.category + "/" + article.id}> Lire l'article </Link>
 
                         </div>

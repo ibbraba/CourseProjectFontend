@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { getImagePath } from '../../Hooks/ImageHook'
 
 const SingleCategoryPage = () => {
 
@@ -9,19 +10,25 @@ const SingleCategoryPage = () => {
     const [errorMessage, SetErrorMessage] = useState(null)
     const [categories, setCategories] = useState([])
     const [selectedCategory, SetSelectedCategory] = useState(null)
-
+    const [imgPath, setImgPath] = useState(null)
     const params = useParams()
     const { id } = params
 
     useEffect(() => {
 
         GetCategories()
+      
     }, [])
 
 
     useEffect(() => {
 
+
         console.log(selectedCategory);
+        if(selectedCategory){
+            setImgPath(getImagePath(selectedCategory.title))
+        }
+        console.log(imgPath);
         GetArticlesFromCategory()
         GetLessonsFromCategory()
 
@@ -29,8 +36,7 @@ const SingleCategoryPage = () => {
 
     useEffect(() => {
 
-        console.log(lessons);
-        console.log(articles);
+     
 
     }, [lessons, articles])
     //Fetch all categories
@@ -40,7 +46,7 @@ const SingleCategoryPage = () => {
             var response = await axios.get("https://localhost:7201/CategoryContoller/GetCategories")
 
             setCategories(response.data)
-            console.log(response.data);
+     
             // Select the choosen category in the response
             var selected = response.data.filter(category => { return category.categoryId === id })
 
@@ -98,8 +104,13 @@ const SingleCategoryPage = () => {
                     <div key={article.id} className="card mb-4" >
 
                         <div className="card-body">
-                            <h5 className="card-title">{article.title}</h5>
-                            <p className="card-text">{article.description}</p>
+                        <div className="post-inside-card">
+                                <div>
+                                    <h5 className="card-title my-3">{article.title}</h5>
+                                    <p className="card-text my-3">{article.description}</p>
+                                </div>
+                                <img src={imgPath}></img>
+                            </div>
                             <Link className='lbutton btn bg-gray' to={'/article/' + article.id}> Lire  </Link>
 
                         </div>
