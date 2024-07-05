@@ -43,7 +43,7 @@ const SingleCategoryPage = () => {
     async function GetCategories() {
         try {
             console.log("Fetching categories ...")
-            var response = await axios.get("https://localhost:7201/CategoryContoller/GetCategories")
+            var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/CategoryContoller/GetCategories")
 
             setCategories(response.data)
      
@@ -62,7 +62,7 @@ const SingleCategoryPage = () => {
 
     async function GetArticlesFromCategory() {
         try {
-            var response = await axios.get("https://localhost:7201/Article/GetByCategory?categoryId=" + id)
+            var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/Article/GetByCategory?categoryId=" + id)
             setArticles(response.data)
 
         } catch (error) {
@@ -73,7 +73,7 @@ const SingleCategoryPage = () => {
     async function GetLessonsFromCategory() {
         try {
 
-            var response = await axios.get("https://localhost:7201/Course/GetByCategory?categoryId=" + id)
+            var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/Course/GetByCategory?categoryId=" + id)
             setLessons(response.data)
 
         } catch (error) {
@@ -84,9 +84,9 @@ const SingleCategoryPage = () => {
     return (
         <div>
 
-            {selectedCategory && <div>
+            {selectedCategory && <div className='post-presentation mb-5'>
 
-                <h1>{selectedCategory.title}</h1>
+                <h1 className='mb-2'>{selectedCategory.title}</h1>
                 <p>{selectedCategory.description}</p>
 
 
@@ -111,7 +111,7 @@ const SingleCategoryPage = () => {
                                 </div>
                                 <img src={imgPath}></img>
                             </div>
-                            <Link className='lbutton btn bg-gray' to={'/article/' + article.id}> Lire  </Link>
+                            <Link className='lbutton btn bg-gray' to={'/article/' + selectedCategory.title  + "/" + article.id}> Lire  </Link>
 
                         </div>
                     </div>
@@ -128,7 +128,7 @@ const SingleCategoryPage = () => {
                     <div className="card-body">
                         <h5 className="card-title">{lesson.title}</h5>
                         <p className="card-text">{lesson.description}</p>
-                        <Link className='lbutton btn bg-gray' to={'/lecon/' + lesson.id}> Lire  </Link>
+                        <Link className='lbutton btn bg-gray' to={'/lecon/' + selectedCategory.title + "/" + lesson.id}> Lire  </Link>
 
                     </div>
                 </div>

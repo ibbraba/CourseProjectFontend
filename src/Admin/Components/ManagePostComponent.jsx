@@ -28,7 +28,7 @@ const ManagePostComponent = () => {
 
     try {
 
-      var response = await axios.get("https://localhost:7201/Article/GetAll")
+      var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/Article/GetAll")
       if (response.status == 200) {
         //      console.log(response.data);
         setArticles(response.data)
@@ -44,7 +44,7 @@ const ManagePostComponent = () => {
   async function GetAllLessons() {
 
     try {
-      var response = await axios.get("https://localhost:7201/Course/GetAll")
+      var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/Course/GetAll")
       setLessons(response.data)
     } catch (error) {
       SetErrorMessage("Une erreur est survenue lors de la récuperation des leçons. Veuillez réessayer")
@@ -55,7 +55,7 @@ const ManagePostComponent = () => {
     
     if(window.confirm("Voulez vous supprimer cette publication ? ")){
       try {
-        var response = await axios.delete("https://localhost:7201/Article/Delete?id=" + id)
+        var response = await axios.delete("https://courseprojectwebapp.azurewebsites.net/Article/Delete?id=" + id)
         GetAllArticles()
       } catch (error) {
         console.log(error);
@@ -67,7 +67,7 @@ const ManagePostComponent = () => {
   async function DeleteLecon(id){
     if(window.confirm("Voulez vous supprimer cette publication ? ")){
       try {
-        var response = await axios.delete("https://localhost:7201/Course/Delete?id=" + id)
+        var response = await axios.delete("https://courseprojectwebapp.azurewebsites.net/Course/Delete?id=" + id)
         GetAllLessons()
       } catch (error) {
         console.log(error);

@@ -35,7 +35,7 @@ const SingleLessonComponent = () => {
   
       try {
         
-        var response = await axios.get("https://localhost:7201/Course/Get?id=" + id)
+        var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/Course/Get?id=" + id)
         setLesson(response.data)
   
       } catch (error) {

@@ -26,7 +26,7 @@ const SingleArticleComponent = () => {
 
         try {
             console.log("Call Single article with id " + id);
-            const res = await axios.get("https://localhost:7201/Article/Article?id=" + id)
+            const res = await axios.get("https://courseprojectwebapp.azurewebsites.net/Article/Article?id=" + id)
             setArticle(res.data)
             SetErrorMessage(null)            
         } catch (error) {

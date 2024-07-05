@@ -80,7 +80,7 @@ const LessonComponent = () => {
     async function GetCategories() {
         try {
             console.log("Fetching categories ...")
-            var response = await axios.get("https://localhost:7201/CategoryContoller/GetCategories")
+            var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/CategoryContoller/GetCategories")
 
             setCategories(response.data)
 
@@ -92,7 +92,7 @@ const LessonComponent = () => {
     async function GetAllLessons() {
 
         try {
-            var response = await axios.get("https://localhost:7201/Course/GetAll")
+            var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/Course/GetAll")
             setLessons(response.data)
             setCurrentLessons(response.data)
 

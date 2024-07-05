@@ -45,7 +45,7 @@ const CategoryComponent = () => {
     async function GetAllCategories(){
         try {
             console.log("Fetching categories ...")
-            var response = await axios.get("https://localhost:7201/CategoryContoller/GetCategories")
+            var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/CategoryContoller/GetCategories")
 
             setCategories(response.data)
             SetErrorMessage(null)
@@ -62,7 +62,6 @@ const CategoryComponent = () => {
     return (
     <div>
 
-        <h1>Categories</h1>
 
         {fullCat && fullCat.map(category => <>
         

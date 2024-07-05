@@ -12,7 +12,7 @@ export async function IsAdminLoggedIn() {
     } else {
       try {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        const response = await axios.get("https://localhost:7201/User/Validate")
+        const response = await axios.get("https://courseprojectwebapp.azurewebsites.net/User/Validate")
         //Returns true
         return response.data
 
@@ -52,7 +52,7 @@ const LoginComponent = () => {
    async function Login(){
 
         try {
-            var response = await axios.post(`https://localhost:7201/User?login=${pseudo}&password=${password}`)
+            var response = await axios.post(`https://courseprojectwebapp.azurewebsites.net/User?login=${pseudo}&password=${password}`)
             
             //Set retuned token in local storage 
             console.log("Login success");

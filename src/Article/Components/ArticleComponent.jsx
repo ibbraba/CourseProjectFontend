@@ -76,7 +76,7 @@ const ArticleComponent = () => {
     async function GetCategories() {
         try {
             console.log("Fetching categories ...")
-            var response = await axios.get("https://localhost:7201/CategoryContoller/GetCategories")
+            var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/CategoryContoller/GetCategories")
 
             setCategories(response.data)
 
@@ -89,7 +89,7 @@ const ArticleComponent = () => {
     async function GetByCategory() {
         try {
 
-            var response = await axios.get("https://localhost:7201/Article/GetByCategory?categoryId=" + currentCategoryId)
+            var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/Article/GetByCategory?categoryId=" + currentCategoryId)
             console.log(response.data);
             setArticles(response.data)
             SetErrorMessage(null)
@@ -105,7 +105,7 @@ const ArticleComponent = () => {
 
         try {
 
-            var response = await axios.get("https://localhost:7201/Article/GetAll")
+            var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/Article/GetAll")
             if (response.status == 200) {
                 //      console.log(response.data);
                 setArticles(response.data)

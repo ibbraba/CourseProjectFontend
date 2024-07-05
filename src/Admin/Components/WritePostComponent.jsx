@@ -66,11 +66,11 @@ const WritePostComponent = () => {
 
             if (post === "lecon") {
                 //Fetch a course
-                let response = await axios.get("https://localhost:7201/Course/Get?id=" + id)
+                let response = await axios.get("https://courseprojectwebapp.azurewebsites.net/Course/Get?id=" + id)
                 setDbpost(response.data)
             } else {
                 //Fetch an article
-                let response = await axios.get("https://localhost:7201/Article/Article?id=" + id)
+                let response = await axios.get("https://courseprojectwebapp.azurewebsites.net/Article/Article?id=" + id)
                 setDbpost(response.data)
             }
 
@@ -107,7 +107,7 @@ const WritePostComponent = () => {
         try {
             if (selectedType == "article") {
                 console.log("Creating article ...");
-                let response = await axios.post("https://localhost:7201/Article/Create", {
+                let response = await axios.post("https://courseprojectwebapp.azurewebsites.net/Article/Create", {
                     "title": title,
                     "description": description,
                     "categoryId": category[0].categoryId,
@@ -122,7 +122,7 @@ const WritePostComponent = () => {
 
             } else {
                 console.log("Creating Lesson ...");
-                let response = await axios.post("https://localhost:7201/Course/Create", {
+                let response = await axios.post("https://courseprojectwebapp.azurewebsites.net/Course/Create", {
                     "title": title,
                     "description": description,
                     "categoryId": category[0].categoryId,
@@ -176,7 +176,7 @@ const WritePostComponent = () => {
             if (selectedType == "Article") {
 
                 console.log("Updating article ...");
-                let response = await axios.put("https://localhost:7201/Article/Update?id=" + id, {
+                let response = await axios.put("https://courseprojectwebapp.azurewebsites.net/Article/Update?id=" + id, {
                     "title": title ? title : dbpost.title,
                     "description": description ? description : dbpost.description,
                     "categoryId": selectedCategory ? category[0].categoryId : dbpost.categoryId,
@@ -196,7 +196,7 @@ const WritePostComponent = () => {
                 console.log("Updating lesson");
         
                console.log("Difficulty : " + difficulty);
-                let response = await axios.put("https://localhost:7201/Course/Update?courseId=" + id, {
+                let response = await axios.put("https://courseprojectwebapp.azurewebsites.net/Course/Update?courseId=" + id, {
                     "title": title ? title : dbpost.title,
                     "description": description ? description : dbpost.description,
                     "categoryId": selectedCategory ? category[0].categoryId : dbpost.categoryId,
@@ -223,7 +223,7 @@ const WritePostComponent = () => {
     async function GetAllCategories() {
         try {
             console.log("Fetching categories ...")
-            var response = await axios.get("https://localhost:7201/CategoryContoller/GetCategories")
+            var response = await axios.get("https://courseprojectwebapp.azurewebsites.net/CategoryContoller/GetCategories")
 
             setCategories(response.data)
             SetErrorMessage(null)
