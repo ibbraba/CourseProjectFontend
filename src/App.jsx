@@ -92,8 +92,7 @@ function App() {
 
           <div className="mentions">
 
-            <a href="">Mentions légales</a>
-            <a href=""> Politique de confidentialité</a>
+            Didacts - Créé par BA Ibra-Alpha
 
 
           </div>

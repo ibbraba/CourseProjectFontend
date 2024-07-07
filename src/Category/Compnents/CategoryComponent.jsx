@@ -69,7 +69,7 @@ const CategoryComponent = () => {
                     
                     <div className="card-body">
                     <div className="post-inside-card">
-                            <div>
+                            <div className='post-display'>
                                 <h5 className="card-title my-3">{category.title}</h5>
                                 <p className="card-text my-3">{category.description}</p>
                             </div>

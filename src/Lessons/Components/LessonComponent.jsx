@@ -109,7 +109,7 @@ const LessonComponent = () => {
                 {categories && categories.map(category =>
 
                     <div key={category.categoryId}>
-                        <button className='btn mbutton category-button' onClick={() => { setCurrentCategoryId(category.categoryId) }}>{category.title}</button>
+                        <button className='btn mbutton category-button mb-3' onClick={() => { setCurrentCategoryId(category.categoryId) }}>{category.title}</button>
                     </div>
                 )}
             </div>
@@ -122,7 +122,7 @@ const LessonComponent = () => {
                     <div className="card-body">
                         <p className='post-category mb-5'> {lecon.category} </p>
                         <div className="post-inside-card">
-                            <div>
+                            <div className='post-display'>
                                 <h5 className="card-title my-3">{lecon.title}</h5>
                                 <p className="card-text my-3">{lecon.description}</p>
                             </div>

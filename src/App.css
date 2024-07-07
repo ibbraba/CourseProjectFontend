@@ -112,6 +112,10 @@ header{
     max-height: 300px;
 }
 
+.post-display{
+    max-width: 100%;
+}
+
 .category-button{
     min-height: 60px;
     min-width: 180px;
